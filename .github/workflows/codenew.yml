@@ -39,8 +39,7 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ALLYDOC_26-06-2024/Lisform/
+        local-dir: D:\ALLYDOC_26-06-2024\Lisform\
         server-dir: ${{ secrets.FTP_REMOTE_PATHN }}
-        passive: true  # Enable passive mode
-        timeout: 30000  # Increase timeout
+       
 
