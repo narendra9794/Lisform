@@ -32,6 +32,12 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release -o ./publish
 
+    # Stop the IIS server before deploying
+    - name: Stop IIS
+      run: |
+        Stop-Service W3SVC -Force
+      shell: pwsh
+
     # Upload published files to FTP server
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -39,8 +45,12 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: ./publish/
-        server-dir: ${{ secrets.FTP_REMOTE_PATHN }}
-        timeout: 30000  # Increase timeout
-       
+        local-dir: ./publish/  # Make sure this points to the correct published output directory
+        server-dir: ${{ secrets.FTP_REMOTE_PATHN }}  # Make sure this ends with /
+        timeout: 30000  # Increase timeout as needed
 
+    # Start the IIS server after deploying
+    - name: Start IIS
+      run: |
+        Start-Service W3SVC
+      shell: pwsh
