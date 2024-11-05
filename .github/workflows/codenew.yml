@@ -41,5 +41,6 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         local-dir: ./publish/
         server-dir: ${{ secrets.FTP_REMOTE_PATH }}
-        passive: true
+        passive: true  # Enable passive mode
+        timeout: 300  # Increase timeout
 
