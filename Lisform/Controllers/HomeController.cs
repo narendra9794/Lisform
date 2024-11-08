@@ -18,6 +18,11 @@ namespace Lisform.Controllers
             return View();
         }
 
+        public IActionResult reg()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
